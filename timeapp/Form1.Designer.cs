@@ -38,6 +38,7 @@
             this.ckTopMost = new System.Windows.Forms.CheckBox();
             this.ckGetPublicIp = new System.Windows.Forms.CheckBox();
             this.lblIPAddress = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // lblLocalTime
@@ -95,6 +96,7 @@
             this.ckTopMost.Size = new System.Drawing.Size(110, 17);
             this.ckTopMost.TabIndex = 4;
             this.ckTopMost.Text = "Topmost window";
+            this.toolTip1.SetToolTip(this.ckTopMost, "When checked, keep the window on top of other windows");
             this.ckTopMost.UseVisualStyleBackColor = true;
             // 
             // ckGetPublicIp
@@ -106,6 +108,8 @@
             this.ckGetPublicIp.Size = new System.Drawing.Size(104, 17);
             this.ckGetPublicIp.TabIndex = 5;
             this.ckGetPublicIp.Text = "Get public IP";
+            this.toolTip1.SetToolTip(this.ckGetPublicIp, "When checked, query public IP address every 5 minutes. To force a refresh, unchec" +
+        "k and recheck.");
             this.ckGetPublicIp.UseVisualStyleBackColor = true;
             // 
             // lblIPAddress
@@ -116,6 +120,11 @@
             this.lblIPAddress.Name = "lblIPAddress";
             this.lblIPAddress.Size = new System.Drawing.Size(0, 42);
             this.lblIPAddress.TabIndex = 6;
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTip1.ToolTipTitle = "TimeApp";
             // 
             // Form1
             // 
@@ -154,6 +163,7 @@
         private System.Windows.Forms.CheckBox ckTopMost;
         private System.Windows.Forms.CheckBox ckGetPublicIp;
         private System.Windows.Forms.Label lblIPAddress;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

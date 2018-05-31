@@ -3,6 +3,7 @@
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Net;
+using System.Text.RegularExpressions;
 
 // namespaces...
 namespace timeapp
@@ -45,7 +46,16 @@ namespace timeapp
                 try
                 {
                     var ip = new WebClient().DownloadString("http://icanhazip.com");
-                    lblIPAddress.Text = $"Public IP address: {ip}";
+
+                    string ipv4 = string.Empty;
+                    try {
+                        Regex regexObj = new Regex(@"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b");
+                        ipv4 = regexObj.Match(ip).Value;
+                    } catch (ArgumentException ex) {
+                        // Syntax error in the regular expression
+                    }
+
+                    lblIPAddress.Text = $"Public IP address: {ipv4}";
                 }
                 catch (Exception exception)
                 {

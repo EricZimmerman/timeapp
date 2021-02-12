@@ -29,7 +29,9 @@ namespace timeapp
             ckGetPublicIp.CheckedChanged += (ss, ee) =>
             {
                 updateIp = true;
-                lblIPAddress.Text = "";
+                lblIPAddress4.Text = string.Empty;
+                lblIPAddress6.Text = string.Empty;
+                lblError.Text = string.Empty;
             };
         }
 
@@ -43,24 +45,47 @@ namespace timeapp
 
             if (ckGetPublicIp.Checked && updateIp)
             {
+
+                lblError.Text = string.Empty;
+
                 try
                 {
-                    var ip = new WebClient().DownloadString("http://icanhazip.com");
+                    var ip4 = new WebClient().DownloadString("http://ipv4.icanhazip.com");
 
-                    string ipv4 = string.Empty;
+                    /*string ipv4 = string.Empty;
                     try {
                         Regex regexObj = new Regex(@"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b");
-                        ipv4 = regexObj.Match(ip).Value;
+                        ipv4 = regexObj.Match(ip4).Value;
                     } catch (ArgumentException ex) {
                         // Syntax error in the regular expression
-                    }
+                    }*/
 
-                    lblIPAddress.Text = $"Public IP address: {ipv4}";
+                    lblIPAddress4.Text = $"Public IPv4 address: {ip4}";
                 }
                 catch (Exception exception)
                 {
-                    lblIPAddress.Text = $"Error getting IP: {exception.Message}";
+                    lblError.Text = $"Error getting IPv4: {exception.Message}";
                 }
+
+                try
+                {
+                    var ip6 = new WebClient().DownloadString("http://ipv6.icanhazip.com");
+
+                    /*string ipv6 = string.Empty;
+                    try {
+                        Regex regexObj = new Regex(@"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b");
+                        ipv6 = regexObj.Match(ip4).Value;
+                    } catch (ArgumentException ex) {
+                        // Syntax error in the regular expression
+                    }*/
+
+                    lblIPAddress6.Text = $"Public IPv6 address: {ip6}";
+                }
+                catch (Exception exception)
+                {
+                    lblError.Text += $"\r\nError getting IPv6: {exception.Message}";
+                }
+
                  
                 nextUpdate = DateTime.Now.AddMinutes(5).Ticks;
                 updateIp = false;

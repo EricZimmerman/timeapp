@@ -20,6 +20,11 @@ namespace timeapp
         // private methods...
         private void Form1_Load(object sender, EventArgs e)
         {
+            lblError.Text = string.Empty;
+            lblIPAddress4.Text = string.Empty;
+            lblIPAddress6.Text = string.Empty;
+
+
             ckTopMost.CheckedChanged += (ss, ee) =>
             {
                 TopMost = ckTopMost.Checked;
@@ -33,7 +38,91 @@ namespace timeapp
                 lblIPAddress6.Text = string.Empty;
                 lblError.Text = string.Empty;
             };
+
+            btnStartSw.Click += (ss, ee) =>
+            {
+                timerSw.Start();
+                btnStartSw.Enabled = false;
+                btnStopSw.Enabled = true;
+
+                if (_swTimeSpan == null)
+                {
+                    _swTimeSpan = new TimeSpan(0);
+                }
+            };
+
+            btnResetSw.Click += (ss, ee) =>
+            {
+                _swTimeSpan = null;
+                lblElapsed.Text = "0";
+                
+                _swTimeSpan = new TimeSpan(0);
+            };
+
+            btnStopSw.Click += (ss, ee) =>
+            {
+                timerSw.Stop();
+                btnStartSw.Enabled = true;
+                btnStopSw.Enabled = false;
+            };
+
+            timerSw.Tick += (ss, ee) =>
+            {
+
+                if (_swTimeSpan == null)
+                {
+                    return;
+                }
+                 
+                _swTimeSpan = _swTimeSpan.Value.Add(TimeSpan.FromMilliseconds(timerSw.Interval));
+
+                lblElapsed.Text = _swTimeSpan.Value.ToString(@"d\.hh\:mm\:ss\.ff");
+            };
+            
+            btnStartCd.Click += (ss, ee) =>
+            {
+                timerCountdown.Start();
+                btnStartCd.Enabled = false;
+                btnStopCd.Enabled = true;
+
+                if (_cdTimeSpan == null)
+                {
+                    _cdTimeSpan = new TimeSpan(0);
+                }
+            };
+
+            btnResetCd.Click += (ss, ee) =>
+            {
+                _cdTimeSpan = null;
+                lblCountdown.Text = "0";
+                
+                _cdTimeSpan = new TimeSpan(0);
+            };
+
+            btnStopCd.Click += (ss, ee) =>
+            {
+                timerCountdown.Stop();
+                btnStartCd.Enabled = true;
+                btnStopCd.Enabled = false;
+            };
+
+            timerCountdown.Tick += (ss, ee) =>
+            {
+
+                if (_cdTimeSpan == null)
+                {
+                    return;
+                }
+                 
+                _cdTimeSpan = _cdTimeSpan.Value.Add(TimeSpan.FromMilliseconds(timerSw.Interval));
+
+                lblCountdown.Text = _cdTimeSpan.Value.ToString(@"d\.hh\:mm\:ss\.ff");
+            };
+
         }
+
+        private TimeSpan? _swTimeSpan = null; 
+        private TimeSpan? _cdTimeSpan = null; 
 
         private bool updateIp = true;
         private long nextUpdate;
@@ -60,7 +149,7 @@ namespace timeapp
                         // Syntax error in the regular expression
                     }*/
 
-                    lblIPAddress4.Text = $"Public IPv4 address: {ip4}";
+                    lblIPAddress4.Text = $"Public IPv4 address:\r\n{ip4}";
                 }
                 catch (Exception exception)
                 {
@@ -79,7 +168,7 @@ namespace timeapp
                         // Syntax error in the regular expression
                     }*/
 
-                    lblIPAddress6.Text = $"Public IPv6 address: {ip6}";
+                    lblIPAddress6.Text = $"Public IPv6 address:\r\n{ip6}";
                 }
                 catch (Exception exception)
                 {
@@ -97,5 +186,7 @@ namespace timeapp
             }
 
         }
+
+      
     }
 }

@@ -32,21 +32,36 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.ckGetPublicIp = new System.Windows.Forms.CheckBox();
             this.ckTopMost = new System.Windows.Forms.CheckBox();
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tpTime = new System.Windows.Forms.TabPage();
-            this.lblError = new System.Windows.Forms.Label();
-            this.lblIPAddress6 = new System.Windows.Forms.Label();
-            this.lblIPAddress4 = new System.Windows.Forms.Label();
             this.lblUTCTime = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblLocalTime = new System.Windows.Forms.Label();
             this.tpStopwatch = new System.Windows.Forms.TabPage();
+            this.lblElapsed = new System.Windows.Forms.Label();
+            this.btnResetSw = new System.Windows.Forms.Button();
+            this.btnStopSw = new System.Windows.Forms.Button();
+            this.btnStartSw = new System.Windows.Forms.Button();
             this.tpCountdown = new System.Windows.Forms.TabPage();
+            this.btnResetCd = new System.Windows.Forms.Button();
+            this.btnStopCd = new System.Windows.Forms.Button();
+            this.btnStartCd = new System.Windows.Forms.Button();
+            this.tpOptions = new System.Windows.Forms.TabPage();
+            this.timerSw = new System.Windows.Forms.Timer(this.components);
+            this.lblError = new System.Windows.Forms.Label();
+            this.lblIPAddress6 = new System.Windows.Forms.Label();
+            this.lblIPAddress4 = new System.Windows.Forms.Label();
+            this.ckGetPublicIp = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblCountdown = new System.Windows.Forms.Label();
+            this.timerCountdown = new System.Windows.Forms.Timer(this.components);
             this.tcMain.SuspendLayout();
             this.tpTime.SuspendLayout();
+            this.tpStopwatch.SuspendLayout();
+            this.tpCountdown.SuspendLayout();
+            this.tpOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -60,27 +75,14 @@
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "TimeApp";
             // 
-            // ckGetPublicIp
-            // 
-            this.ckGetPublicIp.AutoSize = true;
-            this.ckGetPublicIp.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckGetPublicIp.Location = new System.Drawing.Point(14, 126);
-            this.ckGetPublicIp.Name = "ckGetPublicIp";
-            this.ckGetPublicIp.Size = new System.Drawing.Size(104, 17);
-            this.ckGetPublicIp.TabIndex = 12;
-            this.ckGetPublicIp.Text = "Get public IP";
-            this.toolTip1.SetToolTip(this.ckGetPublicIp, "When checked, query public IP address every 5 minutes. To force a refresh, unchec" +
-        "k and recheck.");
-            this.ckGetPublicIp.UseVisualStyleBackColor = true;
-            // 
             // ckTopMost
             // 
             this.ckTopMost.AutoSize = true;
             this.ckTopMost.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckTopMost.Location = new System.Drawing.Point(15, 104);
+            this.ckTopMost.Location = new System.Drawing.Point(8, 6);
             this.ckTopMost.Name = "ckTopMost";
             this.ckTopMost.Size = new System.Drawing.Size(110, 17);
-            this.ckTopMost.TabIndex = 11;
+            this.ckTopMost.TabIndex = 12;
             this.ckTopMost.Text = "Topmost window";
             this.toolTip1.SetToolTip(this.ckTopMost, "When checked, keep the window on top of other windows");
             this.ckTopMost.UseVisualStyleBackColor = true;
@@ -90,11 +92,13 @@
             this.tcMain.Controls.Add(this.tpTime);
             this.tcMain.Controls.Add(this.tpStopwatch);
             this.tcMain.Controls.Add(this.tpCountdown);
+            this.tcMain.Controls.Add(this.tpOptions);
             this.tcMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcMain.HotTrack = true;
             this.tcMain.Location = new System.Drawing.Point(0, 0);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(1096, 259);
+            this.tcMain.Size = new System.Drawing.Size(774, 259);
             this.tcMain.TabIndex = 7;
             // 
             // tpTime
@@ -103,7 +107,6 @@
             this.tpTime.Controls.Add(this.lblIPAddress6);
             this.tpTime.Controls.Add(this.lblIPAddress4);
             this.tpTime.Controls.Add(this.ckGetPublicIp);
-            this.tpTime.Controls.Add(this.ckTopMost);
             this.tpTime.Controls.Add(this.lblUTCTime);
             this.tpTime.Controls.Add(this.label3);
             this.tpTime.Controls.Add(this.label2);
@@ -111,41 +114,16 @@
             this.tpTime.Location = new System.Drawing.Point(4, 22);
             this.tpTime.Name = "tpTime";
             this.tpTime.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTime.Size = new System.Drawing.Size(1088, 233);
+            this.tpTime.Size = new System.Drawing.Size(766, 233);
             this.tpTime.TabIndex = 0;
             this.tpTime.Text = "The time";
             this.tpTime.UseVisualStyleBackColor = true;
-            // 
-            // lblError
-            // 
-            this.lblError.Location = new System.Drawing.Point(11, 165);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(1069, 54);
-            this.lblError.TabIndex = 15;
-            // 
-            // lblIPAddress6
-            // 
-            this.lblIPAddress6.AutoSize = true;
-            this.lblIPAddress6.Font = new System.Drawing.Font("Consolas", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIPAddress6.Location = new System.Drawing.Point(199, 133);
-            this.lblIPAddress6.Name = "lblIPAddress6";
-            this.lblIPAddress6.Size = new System.Drawing.Size(0, 32);
-            this.lblIPAddress6.TabIndex = 14;
-            // 
-            // lblIPAddress4
-            // 
-            this.lblIPAddress4.AutoSize = true;
-            this.lblIPAddress4.Font = new System.Drawing.Font("Consolas", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIPAddress4.Location = new System.Drawing.Point(199, 101);
-            this.lblIPAddress4.Name = "lblIPAddress4";
-            this.lblIPAddress4.Size = new System.Drawing.Size(0, 32);
-            this.lblIPAddress4.TabIndex = 13;
             // 
             // lblUTCTime
             // 
             this.lblUTCTime.AutoSize = true;
             this.lblUTCTime.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUTCTime.Location = new System.Drawing.Point(198, 46);
+            this.lblUTCTime.Location = new System.Drawing.Point(148, 46);
             this.lblUTCTime.Name = "lblUTCTime";
             this.lblUTCTime.Size = new System.Drawing.Size(619, 43);
             this.lblUTCTime.TabIndex = 10;
@@ -175,7 +153,7 @@
             // 
             this.lblLocalTime.AutoSize = true;
             this.lblLocalTime.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLocalTime.Location = new System.Drawing.Point(198, 3);
+            this.lblLocalTime.Location = new System.Drawing.Point(148, 3);
             this.lblLocalTime.Name = "lblLocalTime";
             this.lblLocalTime.Size = new System.Drawing.Size(619, 43);
             this.lblLocalTime.TabIndex = 7;
@@ -183,35 +161,190 @@
             // 
             // tpStopwatch
             // 
+            this.tpStopwatch.Controls.Add(this.label1);
+            this.tpStopwatch.Controls.Add(this.lblElapsed);
+            this.tpStopwatch.Controls.Add(this.btnResetSw);
+            this.tpStopwatch.Controls.Add(this.btnStopSw);
+            this.tpStopwatch.Controls.Add(this.btnStartSw);
             this.tpStopwatch.Location = new System.Drawing.Point(4, 22);
             this.tpStopwatch.Name = "tpStopwatch";
             this.tpStopwatch.Padding = new System.Windows.Forms.Padding(3);
-            this.tpStopwatch.Size = new System.Drawing.Size(1213, 439);
+            this.tpStopwatch.Size = new System.Drawing.Size(766, 233);
             this.tpStopwatch.TabIndex = 1;
             this.tpStopwatch.Text = "The stopwatch";
             this.tpStopwatch.UseVisualStyleBackColor = true;
             // 
+            // lblElapsed
+            // 
+            this.lblElapsed.AutoSize = true;
+            this.lblElapsed.Font = new System.Drawing.Font("Consolas", 70F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblElapsed.Location = new System.Drawing.Point(8, 3);
+            this.lblElapsed.Name = "lblElapsed";
+            this.lblElapsed.Size = new System.Drawing.Size(99, 110);
+            this.lblElapsed.TabIndex = 8;
+            this.lblElapsed.Text = "0";
+            // 
+            // btnResetSw
+            // 
+            this.btnResetSw.Location = new System.Drawing.Point(165, 202);
+            this.btnResetSw.Name = "btnResetSw";
+            this.btnResetSw.Size = new System.Drawing.Size(75, 23);
+            this.btnResetSw.TabIndex = 3;
+            this.btnResetSw.Text = "Reset";
+            this.btnResetSw.UseVisualStyleBackColor = true;
+            // 
+            // btnStopSw
+            // 
+            this.btnStopSw.Enabled = false;
+            this.btnStopSw.Location = new System.Drawing.Point(84, 202);
+            this.btnStopSw.Name = "btnStopSw";
+            this.btnStopSw.Size = new System.Drawing.Size(75, 23);
+            this.btnStopSw.TabIndex = 2;
+            this.btnStopSw.Text = "Stop";
+            this.btnStopSw.UseVisualStyleBackColor = true;
+            // 
+            // btnStartSw
+            // 
+            this.btnStartSw.Location = new System.Drawing.Point(3, 202);
+            this.btnStartSw.Name = "btnStartSw";
+            this.btnStartSw.Size = new System.Drawing.Size(75, 23);
+            this.btnStartSw.TabIndex = 1;
+            this.btnStartSw.Text = "Start";
+            this.btnStartSw.UseVisualStyleBackColor = true;
+            // 
             // tpCountdown
             // 
+            this.tpCountdown.Controls.Add(this.lblCountdown);
+            this.tpCountdown.Controls.Add(this.btnResetCd);
+            this.tpCountdown.Controls.Add(this.btnStopCd);
+            this.tpCountdown.Controls.Add(this.btnStartCd);
             this.tpCountdown.Location = new System.Drawing.Point(4, 22);
             this.tpCountdown.Name = "tpCountdown";
             this.tpCountdown.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCountdown.Size = new System.Drawing.Size(1213, 439);
+            this.tpCountdown.Size = new System.Drawing.Size(766, 233);
             this.tpCountdown.TabIndex = 2;
             this.tpCountdown.Text = "The Countdown";
             this.tpCountdown.UseVisualStyleBackColor = true;
+            // 
+            // btnResetCd
+            // 
+            this.btnResetCd.Enabled = false;
+            this.btnResetCd.Location = new System.Drawing.Point(165, 202);
+            this.btnResetCd.Name = "btnResetCd";
+            this.btnResetCd.Size = new System.Drawing.Size(75, 23);
+            this.btnResetCd.TabIndex = 6;
+            this.btnResetCd.Text = "Reset";
+            this.btnResetCd.UseVisualStyleBackColor = true;
+            // 
+            // btnStopCd
+            // 
+            this.btnStopCd.Enabled = false;
+            this.btnStopCd.Location = new System.Drawing.Point(84, 202);
+            this.btnStopCd.Name = "btnStopCd";
+            this.btnStopCd.Size = new System.Drawing.Size(75, 23);
+            this.btnStopCd.TabIndex = 5;
+            this.btnStopCd.Text = "Stop";
+            this.btnStopCd.UseVisualStyleBackColor = true;
+            // 
+            // btnStartCd
+            // 
+            this.btnStartCd.Location = new System.Drawing.Point(3, 202);
+            this.btnStartCd.Name = "btnStartCd";
+            this.btnStartCd.Size = new System.Drawing.Size(75, 23);
+            this.btnStartCd.TabIndex = 4;
+            this.btnStartCd.Text = "Start";
+            this.btnStartCd.UseVisualStyleBackColor = true;
+            // 
+            // tpOptions
+            // 
+            this.tpOptions.Controls.Add(this.ckTopMost);
+            this.tpOptions.Location = new System.Drawing.Point(4, 22);
+            this.tpOptions.Name = "tpOptions";
+            this.tpOptions.Padding = new System.Windows.Forms.Padding(3);
+            this.tpOptions.Size = new System.Drawing.Size(766, 233);
+            this.tpOptions.TabIndex = 3;
+            this.tpOptions.Text = "Options";
+            this.tpOptions.UseVisualStyleBackColor = true;
+            // 
+            // timerSw
+            // 
+            this.timerSw.Interval = 50;
+            // 
+            // lblError
+            // 
+            this.lblError.Location = new System.Drawing.Point(3, 197);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(755, 31);
+            this.lblError.TabIndex = 23;
+            this.lblError.Text = "aaa";
+            // 
+            // lblIPAddress6
+            // 
+            this.lblIPAddress6.AutoSize = true;
+            this.lblIPAddress6.Font = new System.Drawing.Font("Consolas", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIPAddress6.Location = new System.Drawing.Point(151, 145);
+            this.lblIPAddress6.Name = "lblIPAddress6";
+            this.lblIPAddress6.Size = new System.Drawing.Size(48, 26);
+            this.lblIPAddress6.TabIndex = 22;
+            this.lblIPAddress6.Text = "aaa";
+            // 
+            // lblIPAddress4
+            // 
+            this.lblIPAddress4.AutoSize = true;
+            this.lblIPAddress4.Font = new System.Drawing.Font("Consolas", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIPAddress4.Location = new System.Drawing.Point(151, 94);
+            this.lblIPAddress4.Name = "lblIPAddress4";
+            this.lblIPAddress4.Size = new System.Drawing.Size(48, 26);
+            this.lblIPAddress4.TabIndex = 21;
+            this.lblIPAddress4.Text = "aaa";
+            // 
+            // ckGetPublicIp
+            // 
+            this.ckGetPublicIp.AutoSize = true;
+            this.ckGetPublicIp.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckGetPublicIp.Location = new System.Drawing.Point(14, 102);
+            this.ckGetPublicIp.Name = "ckGetPublicIp";
+            this.ckGetPublicIp.Size = new System.Drawing.Size(110, 17);
+            this.ckGetPublicIp.TabIndex = 20;
+            this.ckGetPublicIp.Text = "Get public IPs";
+            this.toolTip1.SetToolTip(this.ckGetPublicIp, "When checked, query public IP addresses every 5 minutes. To force a refresh, unch" +
+        "eck and recheck.");
+            this.ckGetPublicIp.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(246, 207);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(277, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Format is \'Days.Hours:Minutes:Seconds.Tenths\'";
+            // 
+            // lblCountdown
+            // 
+            this.lblCountdown.AutoSize = true;
+            this.lblCountdown.Font = new System.Drawing.Font("Consolas", 70F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountdown.Location = new System.Drawing.Point(8, 3);
+            this.lblCountdown.Name = "lblCountdown";
+            this.lblCountdown.Size = new System.Drawing.Size(99, 110);
+            this.lblCountdown.TabIndex = 9;
+            this.lblCountdown.Text = "0";
+            // 
+            // timerCountdown
+            // 
+            this.timerCountdown.Interval = 50;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1096, 259);
+            this.ClientSize = new System.Drawing.Size(774, 259);
             this.Controls.Add(this.tcMain);
             this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(900, 200);
+            this.MinimumSize = new System.Drawing.Size(790, 200);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "The time, and more!";
@@ -219,6 +352,12 @@
             this.tcMain.ResumeLayout(false);
             this.tpTime.ResumeLayout(false);
             this.tpTime.PerformLayout();
+            this.tpStopwatch.ResumeLayout(false);
+            this.tpStopwatch.PerformLayout();
+            this.tpCountdown.ResumeLayout(false);
+            this.tpCountdown.PerformLayout();
+            this.tpOptions.ResumeLayout(false);
+            this.tpOptions.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -229,16 +368,28 @@
         private System.Windows.Forms.TabControl tcMain;
         private System.Windows.Forms.TabPage tpTime;
         private System.Windows.Forms.TabPage tpStopwatch;
-        private System.Windows.Forms.Label lblIPAddress4;
-        private System.Windows.Forms.CheckBox ckGetPublicIp;
-        private System.Windows.Forms.CheckBox ckTopMost;
         private System.Windows.Forms.Label lblUTCTime;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblLocalTime;
         private System.Windows.Forms.TabPage tpCountdown;
-        private System.Windows.Forms.Label lblIPAddress6;
+        private System.Windows.Forms.Label lblElapsed;
+        private System.Windows.Forms.Button btnResetSw;
+        private System.Windows.Forms.Button btnStopSw;
+        private System.Windows.Forms.Button btnStartSw;
+        private System.Windows.Forms.Button btnResetCd;
+        private System.Windows.Forms.Button btnStopCd;
+        private System.Windows.Forms.Button btnStartCd;
+        private System.Windows.Forms.Timer timerSw;
+        private System.Windows.Forms.TabPage tpOptions;
+        private System.Windows.Forms.CheckBox ckTopMost;
         private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Label lblIPAddress6;
+        private System.Windows.Forms.Label lblIPAddress4;
+        private System.Windows.Forms.CheckBox ckGetPublicIp;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblCountdown;
+        private System.Windows.Forms.Timer timerCountdown;
     }
 }
 

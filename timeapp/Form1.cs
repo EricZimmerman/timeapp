@@ -1,9 +1,7 @@
 ﻿using System;
-
-using System.Windows.Forms;
-using System.Diagnostics;
+using System.Drawing;
 using System.Net;
-using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 // namespaces...
 namespace timeapp
@@ -11,6 +9,13 @@ namespace timeapp
     // public classes...
     public partial class Form1 : Form
     {
+        private TimeSpan? _cdTimeSpan;
+
+        private TimeSpan? _swTimeSpan;
+        private long _nextUpdate;
+
+        private bool _updateIp = true;
+
         // public constructors...
         public Form1()
         {
@@ -24,16 +29,11 @@ namespace timeapp
             lblIPAddress4.Text = string.Empty;
             lblIPAddress6.Text = string.Empty;
 
-
-            ckTopMost.CheckedChanged += (ss, ee) =>
-            {
-                TopMost = ckTopMost.Checked;
-
-            };
+            ckTopMost.CheckedChanged += (ss, ee) => { TopMost = ckTopMost.Checked; };
 
             ckGetPublicIp.CheckedChanged += (ss, ee) =>
             {
-                updateIp = true;
+                _updateIp = true;
                 lblIPAddress4.Text = string.Empty;
                 lblIPAddress6.Text = string.Empty;
                 lblError.Text = string.Empty;
@@ -53,9 +53,8 @@ namespace timeapp
 
             btnResetSw.Click += (ss, ee) =>
             {
-                _swTimeSpan = null;
                 lblElapsed.Text = "0";
-                
+
                 _swTimeSpan = new TimeSpan(0);
             };
 
@@ -68,17 +67,16 @@ namespace timeapp
 
             timerSw.Tick += (ss, ee) =>
             {
-
                 if (_swTimeSpan == null)
                 {
                     return;
                 }
-                 
+
                 _swTimeSpan = _swTimeSpan.Value.Add(TimeSpan.FromMilliseconds(timerSw.Interval));
 
                 lblElapsed.Text = _swTimeSpan.Value.ToString(@"d\.hh\:mm\:ss\.ff");
             };
-            
+
             btnStartCd.Click += (ss, ee) =>
             {
                 timerCountdown.Start();
@@ -87,16 +85,18 @@ namespace timeapp
 
                 if (_cdTimeSpan == null)
                 {
-                    _cdTimeSpan = new TimeSpan(0);
+                    _cdTimeSpan = new TimeSpan((int) numDays.Value, (int) numHours.Value, (int) numMins.Value,
+                        (int) numSecs.Value);
                 }
             };
 
             btnResetCd.Click += (ss, ee) =>
             {
-                _cdTimeSpan = null;
                 lblCountdown.Text = "0";
-                
-                _cdTimeSpan = new TimeSpan(0);
+                lblCountdown.ForeColor = Color.Black;
+
+                _cdTimeSpan = new TimeSpan((int) numDays.Value, (int) numHours.Value, (int) numMins.Value,
+                    (int) numSecs.Value);
             };
 
             btnStopCd.Click += (ss, ee) =>
@@ -108,33 +108,33 @@ namespace timeapp
 
             timerCountdown.Tick += (ss, ee) =>
             {
-
                 if (_cdTimeSpan == null)
                 {
                     return;
                 }
-                 
-                _cdTimeSpan = _cdTimeSpan.Value.Add(TimeSpan.FromMilliseconds(timerSw.Interval));
 
-                lblCountdown.Text = _cdTimeSpan.Value.ToString(@"d\.hh\:mm\:ss\.ff");
+                _cdTimeSpan = _cdTimeSpan.Value.Subtract(TimeSpan.FromMilliseconds(timerSw.Interval));
+
+                if (_cdTimeSpan.Value > TimeSpan.Zero)
+                {
+                    lblCountdown.Text = _cdTimeSpan.Value.ToString(@"d\.hh\:mm\:ss\.ff");
+                    lblCountdown.ForeColor = Color.Black;
+                }
+                else
+                {
+                    lblCountdown.Text = _cdTimeSpan.Value.ToString(@"\-d\.hh\:mm\:ss\.ff");
+                    lblCountdown.ForeColor = Color.Red;
+                }
             };
-
         }
-
-        private TimeSpan? _swTimeSpan = null; 
-        private TimeSpan? _cdTimeSpan = null; 
-
-        private bool updateIp = true;
-        private long nextUpdate;
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblLocalTime.Text = DateTimeOffset.Now.ToString("yyyy-MM-dd HH:mm:ss.ffffff zz");
             lblUTCTime.Text = DateTimeOffset.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffffff zz");
 
-            if (ckGetPublicIp.Checked && updateIp)
+            if (ckGetPublicIp.Checked && _updateIp)
             {
-
                 lblError.Text = string.Empty;
 
                 try
@@ -175,18 +175,14 @@ namespace timeapp
                     lblError.Text += $"\r\nError getting IPv6: {exception.Message}";
                 }
 
-                 
-                nextUpdate = DateTime.Now.AddMinutes(5).Ticks;
-                updateIp = false;
+                _nextUpdate = DateTime.Now.AddMinutes(5).Ticks;
+                _updateIp = false;
             }
 
-            if (DateTime.Now.Ticks > nextUpdate)
+            if (DateTime.Now.Ticks > _nextUpdate)
             {
-                updateIp = true;
+                _updateIp = true;
             }
-
         }
-
-      
     }
 }

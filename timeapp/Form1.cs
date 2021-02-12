@@ -82,6 +82,7 @@ namespace timeapp
                 timerCountdown.Start();
                 btnStartCd.Enabled = false;
                 btnStopCd.Enabled = true;
+                panelSettings.Visible = false;
 
                 if (_cdTimeSpan == null)
                 {
@@ -104,6 +105,7 @@ namespace timeapp
                 timerCountdown.Stop();
                 btnStartCd.Enabled = true;
                 btnStopCd.Enabled = false;
+                panelSettings.Visible = true;
             };
 
             timerCountdown.Tick += (ss, ee) =>

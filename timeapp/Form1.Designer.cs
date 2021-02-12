@@ -57,23 +57,25 @@
             this.tpOptions = new System.Windows.Forms.TabPage();
             this.timerSw = new System.Windows.Forms.Timer(this.components);
             this.timerCountdown = new System.Windows.Forms.Timer(this.components);
-            this.label4 = new System.Windows.Forms.Label();
-            this.numDays = new System.Windows.Forms.NumericUpDown();
-            this.numHours = new System.Windows.Forms.NumericUpDown();
-            this.numMins = new System.Windows.Forms.NumericUpDown();
-            this.numSecs = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.panelSettings = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.numSecs = new System.Windows.Forms.NumericUpDown();
+            this.numMins = new System.Windows.Forms.NumericUpDown();
+            this.numHours = new System.Windows.Forms.NumericUpDown();
+            this.numDays = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
             this.tcMain.SuspendLayout();
             this.tpTime.SuspendLayout();
             this.tpStopwatch.SuspendLayout();
             this.tpCountdown.SuspendLayout();
             this.tpOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numDays)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHours)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMins)).BeginInit();
+            this.panelSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSecs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMins)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDays)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -276,14 +278,7 @@
             // 
             // tpCountdown
             // 
-            this.tpCountdown.Controls.Add(this.label7);
-            this.tpCountdown.Controls.Add(this.label6);
-            this.tpCountdown.Controls.Add(this.label5);
-            this.tpCountdown.Controls.Add(this.numSecs);
-            this.tpCountdown.Controls.Add(this.numMins);
-            this.tpCountdown.Controls.Add(this.numHours);
-            this.tpCountdown.Controls.Add(this.numDays);
-            this.tpCountdown.Controls.Add(this.label4);
+            this.tpCountdown.Controls.Add(this.panelSettings);
             this.tpCountdown.Controls.Add(this.lblCountdown);
             this.tpCountdown.Controls.Add(this.btnResetCd);
             this.tpCountdown.Controls.Add(this.btnStopCd);
@@ -293,7 +288,7 @@
             this.tpCountdown.Padding = new System.Windows.Forms.Padding(3);
             this.tpCountdown.Size = new System.Drawing.Size(766, 233);
             this.tpCountdown.TabIndex = 2;
-            this.tpCountdown.Text = "The Countdown";
+            this.tpCountdown.Text = "The countdown";
             this.tpCountdown.UseVisualStyleBackColor = true;
             // 
             // lblCountdown
@@ -353,59 +348,55 @@
             // 
             this.timerCountdown.Interval = 50;
             // 
-            // label4
+            // panelSettings
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(5, 127);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 23);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Days";
+            this.panelSettings.Controls.Add(this.label7);
+            this.panelSettings.Controls.Add(this.label6);
+            this.panelSettings.Controls.Add(this.label5);
+            this.panelSettings.Controls.Add(this.numSecs);
+            this.panelSettings.Controls.Add(this.numMins);
+            this.panelSettings.Controls.Add(this.numHours);
+            this.panelSettings.Controls.Add(this.numDays);
+            this.panelSettings.Controls.Add(this.label4);
+            this.panelSettings.Location = new System.Drawing.Point(3, 107);
+            this.panelSettings.Name = "panelSettings";
+            this.panelSettings.Size = new System.Drawing.Size(428, 89);
+            this.panelSettings.TabIndex = 18;
             // 
-            // numDays
+            // label7
             // 
-            this.numDays.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numDays.Location = new System.Drawing.Point(9, 153);
-            this.numDays.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numDays.Name = "numDays";
-            this.numDays.Size = new System.Drawing.Size(84, 31);
-            this.numDays.TabIndex = 0;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(285, 19);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(87, 23);
+            this.label7.TabIndex = 25;
+            this.label7.Text = "Seconds";
             // 
-            // numHours
+            // label6
             // 
-            this.numHours.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numHours.Location = new System.Drawing.Point(99, 153);
-            this.numHours.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numHours.Name = "numHours";
-            this.numHours.Size = new System.Drawing.Size(84, 31);
-            this.numHours.TabIndex = 1;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(192, 19);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(87, 23);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "Minutes";
             // 
-            // numMins
+            // label5
             // 
-            this.numMins.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numMins.Location = new System.Drawing.Point(189, 153);
-            this.numMins.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numMins.Name = "numMins";
-            this.numMins.Size = new System.Drawing.Size(84, 31);
-            this.numMins.TabIndex = 2;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(98, 19);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 23);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Hours";
             // 
             // numSecs
             // 
             this.numSecs.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numSecs.Location = new System.Drawing.Point(279, 153);
+            this.numSecs.Location = new System.Drawing.Point(282, 45);
             this.numSecs.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -413,37 +404,56 @@
             0});
             this.numSecs.Name = "numSecs";
             this.numSecs.Size = new System.Drawing.Size(84, 31);
-            this.numSecs.TabIndex = 3;
+            this.numSecs.TabIndex = 21;
             // 
-            // label5
+            // numMins
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(95, 127);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 23);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Hours";
+            this.numMins.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numMins.Location = new System.Drawing.Point(192, 45);
+            this.numMins.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numMins.Name = "numMins";
+            this.numMins.Size = new System.Drawing.Size(84, 31);
+            this.numMins.TabIndex = 20;
             // 
-            // label6
+            // numHours
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(189, 127);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(87, 23);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Minutes";
+            this.numHours.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numHours.Location = new System.Drawing.Point(102, 45);
+            this.numHours.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numHours.Name = "numHours";
+            this.numHours.Size = new System.Drawing.Size(84, 31);
+            this.numHours.TabIndex = 19;
             // 
-            // label7
+            // numDays
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(282, 127);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(87, 23);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Seconds";
+            this.numDays.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numDays.Location = new System.Drawing.Point(12, 45);
+            this.numDays.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numDays.Name = "numDays";
+            this.numDays.Size = new System.Drawing.Size(84, 31);
+            this.numDays.TabIndex = 18;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(8, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 23);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Days";
             // 
             // Form1
             // 
@@ -469,10 +479,12 @@
             this.tpCountdown.PerformLayout();
             this.tpOptions.ResumeLayout(false);
             this.tpOptions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numDays)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHours)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMins)).EndInit();
+            this.panelSettings.ResumeLayout(false);
+            this.panelSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSecs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMins)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDays)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -505,14 +517,15 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblCountdown;
         private System.Windows.Forms.Timer timerCountdown;
+        private System.Windows.Forms.Panel panelSettings;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numSecs;
         private System.Windows.Forms.NumericUpDown numMins;
         private System.Windows.Forms.NumericUpDown numHours;
         private System.Windows.Forms.NumericUpDown numDays;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -360,14 +360,14 @@
             this.panelSettings.Controls.Add(this.label4);
             this.panelSettings.Location = new System.Drawing.Point(3, 107);
             this.panelSettings.Name = "panelSettings";
-            this.panelSettings.Size = new System.Drawing.Size(428, 89);
+            this.panelSettings.Size = new System.Drawing.Size(428, 73);
             this.panelSettings.TabIndex = 18;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(285, 19);
+            this.label7.Location = new System.Drawing.Point(285, 6);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(87, 23);
             this.label7.TabIndex = 25;
@@ -377,7 +377,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(192, 19);
+            this.label6.Location = new System.Drawing.Point(192, 6);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(87, 23);
             this.label6.TabIndex = 24;
@@ -387,7 +387,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(98, 19);
+            this.label5.Location = new System.Drawing.Point(98, 6);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 23);
             this.label5.TabIndex = 23;
@@ -396,7 +396,7 @@
             // numSecs
             // 
             this.numSecs.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numSecs.Location = new System.Drawing.Point(282, 45);
+            this.numSecs.Location = new System.Drawing.Point(282, 32);
             this.numSecs.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -409,7 +409,7 @@
             // numMins
             // 
             this.numMins.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numMins.Location = new System.Drawing.Point(192, 45);
+            this.numMins.Location = new System.Drawing.Point(192, 32);
             this.numMins.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -422,7 +422,7 @@
             // numHours
             // 
             this.numHours.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numHours.Location = new System.Drawing.Point(102, 45);
+            this.numHours.Location = new System.Drawing.Point(102, 32);
             this.numHours.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -435,7 +435,7 @@
             // numDays
             // 
             this.numDays.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numDays.Location = new System.Drawing.Point(12, 45);
+            this.numDays.Location = new System.Drawing.Point(12, 32);
             this.numDays.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -449,7 +449,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(8, 19);
+            this.label4.Location = new System.Drawing.Point(8, 6);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(54, 23);
             this.label4.TabIndex = 22;

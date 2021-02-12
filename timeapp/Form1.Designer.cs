@@ -358,7 +358,7 @@
             this.panelSettings.Controls.Add(this.numHours);
             this.panelSettings.Controls.Add(this.numDays);
             this.panelSettings.Controls.Add(this.label4);
-            this.panelSettings.Location = new System.Drawing.Point(3, 107);
+            this.panelSettings.Location = new System.Drawing.Point(3, 123);
             this.panelSettings.Name = "panelSettings";
             this.panelSettings.Size = new System.Drawing.Size(428, 73);
             this.panelSettings.TabIndex = 18;

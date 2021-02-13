@@ -25,7 +25,7 @@ namespace timeapp
         // private methods...
         private void Form1_Load(object sender, EventArgs e)
         {
-            lblError.Text = string.Empty;
+            lblStatus.Text = string.Empty;
             lblIPAddress4.Text = string.Empty;
             lblIPAddress6.Text = string.Empty;
 
@@ -36,7 +36,7 @@ namespace timeapp
                 _updateIp = true;
                 lblIPAddress4.Text = string.Empty;
                 lblIPAddress6.Text = string.Empty;
-                lblError.Text = string.Empty;
+                lblStatus.Text = string.Empty;
             };
 
             btnStartSw.Click += (ss, ee) =>
@@ -137,7 +137,7 @@ namespace timeapp
 
             if (ckGetPublicIp.Checked && _updateIp)
             {
-                lblError.Text = string.Empty;
+                lblStatus.Text = string.Empty;
 
                 try
                 {
@@ -155,7 +155,7 @@ namespace timeapp
                 }
                 catch (Exception exception)
                 {
-                    lblError.Text = $"Error getting IPv4: {exception.Message}";
+                    lblStatus.Text = $"Error getting IPv4: {exception.Message}";
                 }
 
                 try
@@ -174,7 +174,7 @@ namespace timeapp
                 }
                 catch (Exception exception)
                 {
-                    lblError.Text += $"\r\nError getting IPv6: {exception.Message}";
+                    lblStatus.Text += $"\r\nError getting IPv6: {exception.Message}";
                 }
 
                 _nextUpdate = DateTime.Now.AddMinutes(5).Ticks;

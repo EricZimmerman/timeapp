@@ -104,8 +104,11 @@ namespace timeapp
                 lblCountdown.Text = "0";
                 lblCountdown.ForeColor = Color.Black;
 
-                _cdTimeSpan = new TimeSpan((int) numDays.Value, (int) numHours.Value, (int) numMins.Value,
-                    (int) numSecs.Value);
+                btnStopCd.PerformClick();
+
+                _cdTimeSpan = null;
+
+
             };
 
             btnStopCd.Click += (ss, ee) =>

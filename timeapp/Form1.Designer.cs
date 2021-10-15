@@ -65,9 +65,9 @@
             this.lblIPAddress6 = new System.Windows.Forms.Label();
             this.lblIPAddress4 = new System.Windows.Forms.Label();
             this.tpOptions = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
             this.timerSw = new System.Windows.Forms.Timer(this.components);
             this.timerCountdown = new System.Windows.Forms.Timer(this.components);
-            this.label9 = new System.Windows.Forms.Label();
             this.tcMain.SuspendLayout();
             this.tpTime.SuspendLayout();
             this.tpStopwatch.SuspendLayout();
@@ -195,7 +195,7 @@
             this.tpStopwatch.Location = new System.Drawing.Point(4, 22);
             this.tpStopwatch.Name = "tpStopwatch";
             this.tpStopwatch.Padding = new System.Windows.Forms.Padding(3);
-            this.tpStopwatch.Size = new System.Drawing.Size(766, 111);
+            this.tpStopwatch.Size = new System.Drawing.Size(756, 111);
             this.tpStopwatch.TabIndex = 1;
             this.tpStopwatch.Text = "The stopwatch";
             this.tpStopwatch.UseVisualStyleBackColor = true;
@@ -257,7 +257,7 @@
             this.tpCountdown.Location = new System.Drawing.Point(4, 22);
             this.tpCountdown.Name = "tpCountdown";
             this.tpCountdown.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCountdown.Size = new System.Drawing.Size(746, 111);
+            this.tpCountdown.Size = new System.Drawing.Size(756, 111);
             this.tpCountdown.TabIndex = 2;
             this.tpCountdown.Text = "The countdown";
             this.tpCountdown.UseVisualStyleBackColor = true;
@@ -416,7 +416,7 @@
             this.tpIpAddresses.Location = new System.Drawing.Point(4, 22);
             this.tpIpAddresses.Name = "tpIpAddresses";
             this.tpIpAddresses.Padding = new System.Windows.Forms.Padding(3);
-            this.tpIpAddresses.Size = new System.Drawing.Size(766, 111);
+            this.tpIpAddresses.Size = new System.Drawing.Size(756, 111);
             this.tpIpAddresses.TabIndex = 4;
             this.tpIpAddresses.Text = "IP addresses";
             this.tpIpAddresses.UseVisualStyleBackColor = true;
@@ -461,14 +461,6 @@
             this.tpOptions.Text = "Options";
             this.tpOptions.UseVisualStyleBackColor = true;
             // 
-            // timerSw
-            // 
-            this.timerSw.Interval = 50;
-            // 
-            // timerCountdown
-            // 
-            this.timerCountdown.Interval = 50;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -477,6 +469,10 @@
             this.label9.Size = new System.Drawing.Size(247, 26);
             this.label9.TabIndex = 14;
             this.label9.Text = "Written by Eric Zimmerman\r\nhttps://github.com/EricZimmerman/timeapp";
+            // 
+            // timerCountdown
+            // 
+            this.timerCountdown.Interval = 500;
             // 
             // Form1
             // 

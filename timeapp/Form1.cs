@@ -12,9 +12,8 @@ namespace timeapp
         private TimeSpan? _cdTimeSpan;
 
         private TimeSpan? _swTimeSpan;
-        private long _nextUpdate;
 
-        private bool _updateIp = true;
+        private long startTicks;
 
         // public constructors...
         public Form1()
@@ -25,18 +24,55 @@ namespace timeapp
         // private methods...
         private void Form1_Load(object sender, EventArgs e)
         {
+            tcMain.SelectedIndexChanged += (ss, ee) =>
+            {
+                timer1.Enabled = tcMain.SelectedIndex == 0;
+
+            };
+
             lblStatus.Text = string.Empty;
             lblIPAddress4.Text = string.Empty;
             lblIPAddress6.Text = string.Empty;
 
             ckTopMost.CheckedChanged += (ss, ee) => { TopMost = ckTopMost.Checked; };
 
-            ckGetPublicIp.CheckedChanged += (ss, ee) =>
+            ckGetPublicIp.CheckedChanged += async (ss, ee) =>
             {
-                _updateIp = true;
+               
                 lblIPAddress4.Text = string.Empty;
                 lblIPAddress6.Text = string.Empty;
                 lblStatus.Text = string.Empty;
+
+                if (ckGetPublicIp.Checked)
+                {
+                    lblStatus.Text = string.Empty;
+
+                    try
+                    {
+                        var ip4 = await new WebClient().DownloadStringTaskAsync("http://ipv4.icanhazip.com");
+
+                        lblIPAddress4.Text = $"Public IPv4 address:\r\n{ip4}";
+                    }
+                    catch (Exception exception)
+                    {
+                        lblStatus.Text = $"Error getting IPv4: {exception.Message}";
+                    }
+
+                    try
+                    {
+                        var ip6 = await new WebClient().DownloadStringTaskAsync("http://ipv6.icanhazip.com");
+
+                        lblIPAddress6.Text = $"Public IPv6 address:\r\n{ip6}";
+                    }
+                    catch (Exception exception)
+                    {
+                        lblStatus.Text += $"\r\nError getting IPv6: {exception.Message}";
+                    }
+
+                 
+                 
+                }
+
             };
 
             Closing += (ss, ee) =>
@@ -53,10 +89,7 @@ namespace timeapp
                 btnStartSw.Enabled = false;
                 btnStopSw.Enabled = true;
 
-                if (_swTimeSpan == null)
-                {
-                    _swTimeSpan = new TimeSpan(0);
-                }
+                 startTicks = DateTimeOffset.Now.Ticks;
             };
 
             btnResetSw.Click += (ss, ee) =>
@@ -75,12 +108,11 @@ namespace timeapp
 
             timerSw.Tick += (ss, ee) =>
             {
-                if (_swTimeSpan == null)
-                {
-                    return;
-                }
+               
 
-                _swTimeSpan = _swTimeSpan.Value.Add(TimeSpan.FromMilliseconds(timerSw.Interval));
+                var foo = DateTimeOffset.Now.Ticks - startTicks;
+
+                _swTimeSpan = new TimeSpan(foo);
 
                 lblElapsed.Text = _swTimeSpan.Value.ToString(@"d\.hh\:mm\:ss\.ff");
             };
@@ -107,8 +139,6 @@ namespace timeapp
                 btnStopCd.PerformClick();
 
                 _cdTimeSpan = null;
-
-
             };
 
             btnStopCd.Click += (ss, ee) =>
@@ -126,60 +156,29 @@ namespace timeapp
                     return;
                 }
 
-                _cdTimeSpan = _cdTimeSpan.Value.Subtract(TimeSpan.FromMilliseconds(timerSw.Interval));
+                var foo = _cdTimeSpan.Value.Subtract(TimeSpan.FromMilliseconds(timerCountdown.Interval));
+
+                _cdTimeSpan = foo;//new TimeSpan(foo);// _cdTimeSpan.Value.Subtract(TimeSpan.FromMilliseconds(timerSw.Interval));
 
                 if (_cdTimeSpan.Value > TimeSpan.Zero)
                 {
-                    lblCountdown.Text = _cdTimeSpan.Value.ToString(@"d\.hh\:mm\:ss\.ff");
+                    lblCountdown.Text = _cdTimeSpan.Value.ToString(@"d\.hh\:mm\:ss");
                     lblCountdown.ForeColor = Color.Black;
                 }
                 else
                 {
-                    lblCountdown.Text = _cdTimeSpan.Value.ToString(@"\-d\.hh\:mm\:ss\.ff");
+                    lblCountdown.Text = _cdTimeSpan.Value.ToString(@"\-d\.hh\:mm\:ss");
                     lblCountdown.ForeColor = Color.Red;
                 }
             };
 
 
-            timer1.Tick += async (ss, ee) =>
+            timer1.Tick +=  (ss, ee) =>
             {
                 lblLocalTime.Text = DateTimeOffset.Now.ToString("yyyy-MM-dd HH:mm:ss.ffffff zz");
                 lblUTCTime.Text = DateTimeOffset.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffffff zz");
 
-                if (ckGetPublicIp.Checked && _updateIp)
-                {
-                    lblStatus.Text = string.Empty;
-
-                    try
-                    {
-                        var ip4 = await new WebClient().DownloadStringTaskAsync("http://ipv4.icanhazip.com");
-
-                        lblIPAddress4.Text = $"Public IPv4 address:\r\n{ip4}";
-                    }
-                    catch (Exception exception)
-                    {
-                        lblStatus.Text = $"Error getting IPv4: {exception.Message}";
-                    }
-
-                    try
-                    {
-                        var ip6 = await new WebClient().DownloadStringTaskAsync("http://ipv6.icanhazip.com");
-
-                        lblIPAddress6.Text = $"Public IPv6 address:\r\n{ip6}";
-                    }
-                    catch (Exception exception)
-                    {
-                        lblStatus.Text += $"\r\nError getting IPv6: {exception.Message}";
-                    }
-
-                    _nextUpdate = DateTime.Now.AddMinutes(5).Ticks;
-                    _updateIp = false;
-                }
-
-                if (DateTime.Now.Ticks > _nextUpdate)
-                {
-                    _updateIp = true;
-                }
+               
             };
         }
 

@@ -14,9 +14,6 @@ namespace timeapp
 #if NET
             //Per-Monitor V2 DPI awareness first: sharp and the right size on each monitor
             Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
-#else
-            //(.NET Framework 4.6.2 has no TLS 1.2 by default: the public IP lookup is HTTPS)
-            System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Tls12;
 #endif
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

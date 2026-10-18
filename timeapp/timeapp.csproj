@@ -4,7 +4,7 @@
     <RootNamespace>TimeApp</RootNamespace>
     <AssemblyName>TimeApp</AssemblyName>
     <!-- the .NET Framework build is the one on the download page; .NET 10 as for the other tools -->
-    <TargetFrameworks>net462;net10.0-windows</TargetFrameworks>
+    <TargetFrameworks>net481;net10.0-windows</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
     <LangVersion>latest</LangVersion>
     <AssemblyTitle>TimeApp</AssemblyTitle>
@@ -17,7 +17,7 @@
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <ApplicationIcon>SandTimer.ico</ApplicationIcon>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net481'">
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>

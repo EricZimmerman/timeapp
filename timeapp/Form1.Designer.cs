@@ -207,7 +207,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(368, 17);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Format is \'Days.Hours:Minutes:Seconds.Tenths\'";
+            this.label1.Text = "Format is \'Days.Hours:Minutes:Seconds.Hundredths\'";
             // 
             // lblElapsed
             // 
@@ -482,7 +482,6 @@
             this.Controls.Add(this.tcMain);
             this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(780, 176);
             this.Name = "Form1";

@@ -10,7 +10,7 @@
 
 ## Documentation
 
-An app that tells the time using in `YYYY-MM-DD HH:MM:SS.FFFFFF` format.
+An app that tells the time in `YYYY-MM-DD HH:MM:SS.FFFFFF` format, local and UTC, with a stopwatch, a countdown (it flashes and beeps at zero), your public IP addresses, and a timestamp converter: paste a number or hex bytes and see it as Unix seconds/milliseconds/microseconds, Windows FILETIME, WebKit/Chrome, Mac (Cocoa) or OLE time. Double-click a time to copy it.
 
 # Download Eric Zimmerman's Tools
 

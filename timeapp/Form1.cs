@@ -27,7 +27,9 @@ namespace timeapp
         private TabPage _tpConverter;
         private TextBox _txtConvert;
         private ListBox _lstConverted;
-        private Label _lblNow;
+        //the current time in each format, a box each: only a value that changed is drawn again (one label for all of
+        //them was drawn again at every tick, and flickered: Issues #251)
+        private Label[] _nowValues;
 
         public Form1()
         {
@@ -193,6 +195,12 @@ namespace timeapp
                 lblUTCTime.Text = now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff zzz");
             };
 
+            //the times change at every tick: drawn off screen, so they don't flicker (as the converter's Now values)
+            foreach (var label in new[] {lblLocalTime, lblUTCTime, lblElapsed, lblCountdown})
+            {
+                SetDoubleBuffered(label);
+            }
+
             //double click a time: copied
             foreach (var label in new[] {lblLocalTime, lblUTCTime, lblElapsed, lblCountdown, lblIPAddress4, lblIPAddress6})
             {
@@ -313,9 +321,19 @@ namespace timeapp
             top.Controls.Add(_txtConvert);
             top.Controls.Add(hint);
 
-            _lblNow = new Label {Dock = DockStyle.Bottom, AutoSize = false, Height = mono.Height + 4, Font = mono, ForeColor = SystemColors.GrayText};
-            toolTip1.SetToolTip(_lblNow, "Now, in each format. Double-click to copy");
-            _lblNow.DoubleClick += (ss, ee) => Copy(_lblNow.Text);
+            var now = new FlowLayoutPanel {Dock = DockStyle.Bottom, AutoSize = true, WrapContents = true, Padding = new Padding(0, 3, 0, 0)};
+            _nowValues = new Label[TimestampConverter.NowNames.Length];
+            for (var i = 0; i < _nowValues.Length; i++)
+            {
+                var name = TimestampConverter.NowNames[i];
+                now.Controls.Add(new Label {AutoSize = true, Text = name, ForeColor = SystemColors.GrayText, Margin = new Padding(i == 0 ? 0 : 9, 6, 0, 3)});
+                var value = new Label {AutoSize = true, Font = mono, BorderStyle = BorderStyle.FixedSingle, Padding = new Padding(2), Margin = new Padding(3, 3, 3, 3)};
+                SetDoubleBuffered(value);
+                toolTip1.SetToolTip(value, $"Now as {name}. Double-click to copy");
+                value.DoubleClick += (ss, ee) => Copy(((Label) ss).Text);
+                _nowValues[i] = value;
+                now.Controls.Add(value);
+            }
 
             _lstConverted = new ListBox {Dock = DockStyle.Fill, Font = mono, IntegralHeight = false, BorderStyle = BorderStyle.None};
             toolTip1.SetToolTip(_lstConverted, "Double-click a line to copy its time");
@@ -328,7 +346,7 @@ namespace timeapp
             };
 
             _tpConverter.Controls.Add(_lstConverted);
-            _tpConverter.Controls.Add(_lblNow);
+            _tpConverter.Controls.Add(now);
             _tpConverter.Controls.Add(top);
 
             _txtConvert.TextChanged += (ss, ee) =>
@@ -355,10 +373,28 @@ namespace timeapp
 
         private void UpdateNow()
         {
-            if (_lblNow != null && tcMain.SelectedTab == _tpConverter)
+            if (_nowValues != null && tcMain.SelectedTab == _tpConverter)
             {
-                _lblNow.Text = TimestampConverter.Now(DateTimeOffset.UtcNow);
+                var values = TimestampConverter.NowValues(DateTimeOffset.UtcNow);
+                for (var i = 0; i < values.Length; i++)
+                {
+                    //(setting the same text draws it again too)
+                    if (_nowValues[i].Text != values[i])
+                    {
+                        _nowValues[i].Text = values[i];
+                    }
+                }
             }
+        }
+
+        /// <summary>
+        ///     Draws <paramref name="control" /> off screen first, so a label whose text changes many times a second
+        ///     doesn't flicker (its background was drawn, then the text). DoubleBuffered is protected: set by reflection
+        /// </summary>
+        private static void SetDoubleBuffered(Control control)
+        {
+            typeof(Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+                ?.SetValue(control, true, null);
         }
 
         [StructLayout(LayoutKind.Sequential)]

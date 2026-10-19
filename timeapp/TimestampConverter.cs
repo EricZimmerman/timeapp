@@ -118,13 +118,22 @@ namespace timeapp
         }
 
         /// <summary>
-        ///     <paramref name="time" /> in each format, for the Now line
+        ///     The formats the current time is shown in, under the converter's results (<see cref="NowValues" />)
         /// </summary>
-        public static string Now(DateTimeOffset time)
+        public static readonly string[] NowNames = {"Unix", "FILETIME", "WebKit", "Cocoa"};
+
+        /// <summary>
+        ///     <paramref name="time" /> in each of <see cref="NowNames" />
+        /// </summary>
+        public static string[] NowValues(DateTimeOffset time)
         {
-            var unix = time.ToUnixTimeSeconds();
-            var ft = time.ToFileTime();
-            return $"Unix {unix}   FILETIME 0x{ft:X16}   WebKit {(time - FileTimeEpoch).Ticks / 10}   Cocoa {(long) (time - CocoaEpoch).TotalSeconds}";
+            return new[]
+            {
+                time.ToUnixTimeSeconds().ToString(),
+                $"0x{time.ToFileTime():X16}",
+                ((time - FileTimeEpoch).Ticks / 10).ToString(),
+                ((long) (time - CocoaEpoch).TotalSeconds).ToString()
+            };
         }
     }
 }

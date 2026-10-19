@@ -19,3 +19,4 @@ dotnet build timeapp.slnx -c Release
 ## Versioning and release
 
 `<Version>` in the csproj, bumped by hand. Eric builds, signs and releases.
+- Release builds are staged, signed and zipped by `Build-ZimmermanTools.ps1` in the get-zimmermantools repository (cloned next to this one). Its program table says what goes in this tool's download zip (the files taken from the build, folders copied from the repositories, files kept from the current release zip); a new output file, a content folder or a change in how the tool is built (single file, another framework) needs that entry updated.

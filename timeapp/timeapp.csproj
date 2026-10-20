@@ -17,6 +17,12 @@
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <ApplicationIcon>SandTimer.ico</ApplicationIcon>
   </PropertyGroup>
+  <!-- .NET 10: one exe, as the other programs with a window (publish -r win-x64); framework dependent, natives next to it -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-windows'">
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>false</SelfContained>
+    <IncludeNativeLibrariesForSelfExtract>false</IncludeNativeLibrariesForSelfExtract>
+  </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
     <Reference Include="System.Net.Http" />
   </ItemGroup>

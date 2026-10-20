@@ -25,6 +25,19 @@ namespace timeapp
         private static readonly HttpClient Http = new HttpClient {Timeout = TimeSpan.FromSeconds(15)};
 
         private TabPage _tpConverter;
+
+        private bool _windowActive = true;
+
+        /// <summary>
+        ///     The clock runs for the Time tab while the window isn't minimized, and for the converter only while the window is
+        ///     also the active one
+        /// </summary>
+        private void UpdateClockTimer()
+        {
+            var visible = WindowState != FormWindowState.Minimized;
+
+            timer1.Enabled = visible && (tcMain.SelectedTab == tpTime || (tcMain.SelectedTab == _tpConverter && _windowActive));
+        }
         private TextBox _txtConvert;
         private ListBox _lstConverted;
         //the current time in each format, a box each: only a value that changed is drawn again (one label for all of
@@ -55,9 +68,24 @@ namespace timeapp
 
             tcMain.SelectedIndexChanged += (ss, ee) =>
             {
-                timer1.Enabled = tcMain.SelectedTab == tpTime || tcMain.SelectedTab == _tpConverter;
+                UpdateClockTimer();
                 UpdateNow();
             };
+
+            //the converter's current times update only while its tab is shown and the window is active (Issues #256);
+            //coming back to it shows the current time at once
+            Activated += (ss, ee) =>
+            {
+                _windowActive = true;
+                UpdateClockTimer();
+                UpdateNow();
+            };
+            Deactivate += (ss, ee) =>
+            {
+                _windowActive = false;
+                UpdateClockTimer();
+            };
+            Resize += (ss, ee) => UpdateClockTimer();
 
             lblStatus.Text = string.Empty;
             lblIPAddress4.Text = string.Empty;

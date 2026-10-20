@@ -28,6 +28,9 @@ namespace timeapp
 
         private bool _windowActive = true;
 
+        //the public IP request's turn: one started before the box was unchecked or checked again shows nothing
+        private int _ipGeneration;
+
         /// <summary>
         ///     The clock runs for the Time tab while the window isn't minimized, and for the converter only while the window is
         ///     also the active one
@@ -70,6 +73,7 @@ namespace timeapp
             {
                 UpdateClockTimer();
                 UpdateNow();
+                ShowElapsedIfShown();
             };
 
             //the converter's current times update only while its tab is shown and the window is active (Issues #256);
@@ -85,7 +89,11 @@ namespace timeapp
                 _windowActive = false;
                 UpdateClockTimer();
             };
-            Resize += (ss, ee) => UpdateClockTimer();
+            Resize += (ss, ee) =>
+            {
+                UpdateClockTimer();
+                ShowElapsedIfShown();
+            };
 
             lblStatus.Text = string.Empty;
             lblIPAddress4.Text = string.Empty;
@@ -95,6 +103,9 @@ namespace timeapp
 
             ckGetPublicIp.CheckedChanged += async (ss, ee) =>
             {
+                //(a request still running when the box was unchecked, or checked again, filled the labels after that)
+                var generation = ++_ipGeneration;
+
                 lblIPAddress4.Text = string.Empty;
                 lblIPAddress6.Text = string.Empty;
                 lblStatus.Text = string.Empty;
@@ -108,20 +119,40 @@ namespace timeapp
                 try
                 {
                     var ip4 = (await Http.GetStringAsync("https://ipv4.icanhazip.com")).Trim();
+                    if (generation != _ipGeneration)
+                    {
+                        return;
+                    }
+
                     lblIPAddress4.Text = $"Public IPv4 address:\r\n{ip4}";
                 }
                 catch (Exception exception)
                 {
+                    if (generation != _ipGeneration)
+                    {
+                        return;
+                    }
+
                     lblStatus.Text = $"Error getting IPv4: {exception.Message}";
                 }
 
                 try
                 {
                     var ip6 = (await Http.GetStringAsync("https://ipv6.icanhazip.com")).Trim();
+                    if (generation != _ipGeneration)
+                    {
+                        return;
+                    }
+
                     lblIPAddress6.Text = $"Public IPv6 address:\r\n{ip6}";
                 }
                 catch (Exception exception)
                 {
+                    if (generation != _ipGeneration)
+                    {
+                        return;
+                    }
+
                     lblStatus.Text += $"\r\nNo public IPv6 address ({exception.Message})";
                 }
             };
@@ -166,7 +197,9 @@ namespace timeapp
                 btnStopSw.Enabled = false;
             };
 
-            timerSw.Tick += (ss, ee) => ShowElapsed();
+            //(the label was updated at every tick also while another tab was shown or the window was minimized; it is
+            //brought up to date when its tab is shown again)
+            timerSw.Tick += (ss, ee) => ShowElapsedIfShown();
 
             //the countdown
             btnStartCd.Click += (ss, ee) =>
@@ -268,6 +301,14 @@ namespace timeapp
             {
                 MinimumSize = new Size(MinimumSize.Width + growX, MinimumSize.Height + growY);
                 ClientSize = new Size(ClientSize.Width + growX, ClientSize.Height + growY);
+            }
+        }
+
+        private void ShowElapsedIfShown()
+        {
+            if (tcMain.SelectedTab == tpStopwatch && WindowState != FormWindowState.Minimized)
+            {
+                ShowElapsed();
             }
         }
 

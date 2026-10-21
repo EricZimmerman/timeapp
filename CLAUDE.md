@@ -16,6 +16,8 @@ TimeApp (`timeapp/timeapp.csproj`, WinForms, no DevExpress; `net48` (the downloa
 dotnet build timeapp.slnx -c Release
 ```
 
+Debug symbols: embedded portable pdbs and, for Release, `ContinuousIntegrationBuild` (source paths `/_/...`) are set in `Directory.Build.props` (Eric, 2026-10-20: stack traces and Exceptionless reports get file and line numbers); no pdb file ships. Don't add `DebugType` or `DebugSymbols` to the project files.
+
 ## Versioning and release
 
 `<Version>` in the csproj, bumped by hand. Eric builds, signs and releases.

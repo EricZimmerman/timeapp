@@ -11,7 +11,7 @@
     <Company>Eric R. Zimmerman</Company>
     <Product>TimeApp</Product>
     <Description>A basic time app with millisecond precision</Description>
-    <Copyright>Eric Zimmerman</Copyright>
+    <Copyright>Eric R. Zimmerman 2027</Copyright>
     <Version>2026.10.0</Version>
     <!-- the version without +<commit> -->
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>

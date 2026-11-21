@@ -4,3 +4,21 @@ updates:
     directory: /
     schedule:
       interval: monthly
+    ignore:
+      # .NET 11 packages (11.x) not for now
+      - dependency-name: System.Text.Encoding.CodePages
+        versions: [">= 11.0.0"]
+      - dependency-name: Microsoft.Data.Sqlite
+        versions: [">= 11.0.0"]
+      - dependency-name: System.IO.Hashing
+        versions: [">= 11.0.0"]
+      - dependency-name: System.Security.Cryptography.ProtectedData
+        versions: [">= 11.0.0"]
+      - dependency-name: System.Resources.Extensions
+        versions: [">= 11.0.0"]
+      - dependency-name: System.Reflection.MetadataLoadContext
+        versions: [">= 11.0.0"]
+      - dependency-name: System.Management
+        versions: [">= 11.0.0"]
+      - dependency-name: System.DirectoryServices.Protocols
+        versions: [">= 11.0.0"]
